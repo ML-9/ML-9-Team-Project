@@ -22,7 +22,9 @@ Based on significance of variables, create a model to predict stroke or not
 
 _We have determined that we need to develop an experiment to determine the number of layers that will be optimal to get a result from our project._
 
+Dask will be useful to run the experiments in parallel on multiple cores. We can use Google Colab to access GPUs for training our models.
+
 
 ## Possible Problem:
-The occurance of stroke overwhelms the lack of stroke by an order of magnitude.
+The occurance of stroke overwhelms the lack of stroke by an order of magnitude in the dataset, that could be a source of bias. We may need to use oversampling or undersampling techniques to balance the dataset before training our models. 
 
