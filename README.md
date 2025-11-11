@@ -121,7 +121,7 @@ Dask will be useful to run the experiments in parallel on multiple cores. We can
 
 Adding this comment from outside account
 ====
-To try and find solution to a GitHub issue, we created a test account to make a remote branch and create a pull request.
+To try and find solution to a GitHub issue, we created a test account to make a remote branch and create a pull request. We also developed a step-by-step walkthrough of using GitHub in organizations.
 
 
 
