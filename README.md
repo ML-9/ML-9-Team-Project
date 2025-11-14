@@ -176,8 +176,3 @@ Notes and recommendations:
 - Large/compiled packages (torch, tensorflow) can make the image big; for production or CI consider a multi-stage build or a trimmed requirements set for specific tasks.
 - For non-interactive reproducible runs (training scripts, tests) consider adding a `CMD` or `ENTRYPOINT` variation that runs a script (e.g., `python -m experiments.train`) instead of Jupyter Lab.
 
-If you'd like, I can also:
-
-- Add a small `run.sh` script that accepts a `MODE` (notebook|train) and starts the appropriate process.
-- Create a smaller `requirements-light.txt` for CI or quick runs (without heavy deps like `torch` / `tensorflow`) and a second Dockerfile variant for faster builds.
-
