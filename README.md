@@ -1,11 +1,12 @@
-# ML-9 Team Project
-### Evaluating Machine Learning Methods for Reliable Stroke Classification
+# ML-9 Team Project - Evaluating Machine Learning Methods for Reliable Stroke Classification
 
 # Overview
 
 Stroke is one of the leading causes of death and disability worldwide. Early identification of high-risk individuals is crucial, but many datasets—like the commonly used Kaggle *Stroke Prediction Dataset*—exhibit extreme class imbalance, where stroke cases represent only about 5% of samples.
 
-Our project initially aimed to build a stroke prediction model, but as we progressed it became clear that the core challenge was determining **which machine learning method performs most reliably under severe class imbalance**.
+Before deciding on a project, we looked at multiple datasets related to healthcare and disease prediction. We wanted to score areas of study based on the number of features they measured, as well as the number of datapoints available. After evaluating several options, we selected the Kaggle Stroke Prediction Dataset due to its clinical relevance and rich feature variety.
+
+Once we decided on a dataset, our project initially aimed to build a stroke prediction model, but as we progressed it became clear that the core challenge was determining **which machine learning method performs most reliably under severe class imbalance**.
 
 To address this, we focused on:
 
@@ -123,15 +124,16 @@ This dataset and approach have several limitations:
 # Reproducibility & Setup Instructions
 
 ## Local Setup
+
 ### Clone
 ```
-git clone <repo-url>
-cd ml9-team-project
+git clone https://github.com/ML-9/ML-9-Team-Project
+cd ML-9-Team-Project
 ```
 
 ### Install
 ```
-conda create -n ml9 python=3.11
+conda create -n ml9 python=3.10
 conda activate ml9
 pip install -r requirements.txt
 ```
@@ -163,6 +165,9 @@ docker-compose up --build
 ```
 http://localhost:8888
 ```
+
+### Run Notebooks
+Open and run the Jupyter notebooks in the `process/` directories. Specifically, to recreate the experiments, look in the `Experiments` directory.
 
 # References
 
