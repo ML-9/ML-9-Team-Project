@@ -1,178 +1,163 @@
----
-title: "ML-9 Team Project - Stroke Prediction Using Machine Learning"
-author: "<Our Names>"
-bibliography: references.bib
----
-
 # ML-9 Team Project
+### Evaluating Machine Learning Methods for Reliable Stroke Classification
 
-Stroke prediction dataset is selected (https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset)
+# Overview
 
-# Purpose & Overview
+Stroke is one of the leading causes of death and disability worldwide. Early identification of high-risk individuals is crucial, but many datasets—like the commonly used Kaggle *Stroke Prediction Dataset*—exhibit extreme class imbalance, where stroke cases represent only about 5% of samples.
 
-Stroke, a leading cause of death and disability worldwide, places a significant burden on healthcare systems. In fact, yearly stroke-related health care costs in Ontario, Canada were estimated to be up to $40,000 as of 2018 [1] which has likely only increased since then. Early prediction and intervention are therefore crucial to reducing mortality, improving patient outcome and reducing the costs on the health care system. Machine learning approaches offer promising tools for enhancing stroke prediction by analyzing vast datasets to identify patterns and risk factors that traditional methods may overlook.
+Our project initially aimed to build a stroke prediction model, but as we progressed it became clear that the core challenge was determining **which machine learning method performs most reliably under severe class imbalance**.
 
-This project aims to develop a predictive model for stroke risk using demographic, health, and lifestyle data. By analyzing patterns in patient profiles, we seek to identify key indicators that contribute to stroke incidence and build a tool that can assist healthcare providers in early intervention and resource prioritization.
+To address this, we focused on:
 
-## Business Motivation
+- Cleaning and preprocessing the data
+- Augmentating the minority class using SMOTE and related techniques
+- Training and evaluating multiple ML and DL models
+- Determining which approach provides the **most robust, accurate classification** of stroke vs. non-stroke cases
 
-Stroke is a leading cause of death and long-term disability worldwide. Early detection and prevention are critical to reducing healthcare costs and improving patient outcomes. However, many healthcare systems lack scalable tools to assess stroke risk across diverse populations.
+Our final conclusion: **Random Forest is the most reliable and best-performing method** for this dataset once class imbalance is addressed.
 
-This project addresses that gap by:
+# Stakeholders
 
-* Building a data-driven model to predict stroke risk
-* Identifying high-impact features for targeted screening
-* Supporting public health strategies with actionable insights
-* Enabling hospitals and clinics to prioritize care for at-risk individuals
+### Primary Stakeholders
+- **Healthcare providers** – benefit from improved tools for identifying high-risk patients.
+- **Public health planners** – gain insights into risk profiles across populations.
+- **Patients** – particularly those with cardiovascular disease risk factors.
 
-# Goals & Objectives
+### Secondary Stakeholders
+- **Researchers in medical ML**
+- **Healthcare systems**
 
-Machine learning models (ML) including Random Forests and Deep Learning (DL) models like Convolutional Neural Networks have been successfully used previously for stroke prevention [2,3]. The goals of the current project are to explore ML and DL models using a diverse and large-scale dataset to predict the occurrence of stroke while achieving high sensitivity and specificity.
+# Narrative Summary (What We Actually Did)
 
-<!-- The specific objectives of the project include:
-1. 
-2.
-3. -->
+After reviewing multiple datasets, we selected the Kaggle Stroke Prediction Dataset due to its clinical relevance and rich feature variety.
 
-# Techniques & Technologies
+However, we identified that the dataset suffers from severe class imbalance. To overcome this, we:
 
-## Key Findings & Setup Instructions
+1. Cleaned and preprocessed data
+2. Applied SMOTE augmentation
+3. Trained Logistic Regression, Random Forest, and FCNN models
+4. Evaluated with ROC-AUC, recall, F1, and confusion matrices
+5. Analyzed feature importance
 
-After reviewing several datasets, we have decided to investigate the Stroke Prediction one. We are investigating whether a difference can be found by ML between male and female subjects.
+**Conclusion:** Random Forest produced the most accurate and stable classification results.
 
-https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset
+# Dataset Description
 
-## Dataset Description
+Dataset: https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset
 
-We are using the publicly available  **Stroke Prediction Dataset** , which includes 11 features and a binary target variable (`stroke`). The dataset contains 5110 records with the following attributes:
+Contains **5110 rows and 11 features** including demographics, comorbidities, lifestyle factors, and the binary stroke target.
 
-* **Demographics** : `gender`, `age`, `ever_married`, `Residence_type`
-* **Health indicators** : `hypertension`, `heart_disease`, `avg_glucose_level`, `bmi`, `smoking_status`
-* **Socioeconomic** : `work_type`
-* **Target** : `stroke` (1 = stroke occurred, 0 = no stroke)
+# Methodology
 
-This dataset provides a rich foundation for exploratory analysis and predictive modeling.
+## Preprocessing
+- BMI median imputation
+- Encoding categorical variables
+- Filtering implausible values
+- Standardization for neural networks
 
-## Modeling Plan
+## Addressing Class Imbalance
+- SMOTE
+- Balanced class weights
+- Stratified train/test splits
 
-We will explore multiple modeling approaches to capture both linear and non-linear relationships:
+## Models Tested
+- **Logistic Regression** – interpretable baseline
+- **Random Forest** – most stable and accurate
+- **FCNN** – prone to overfitting due to dataset size
 
-### 1. Baseline Models
+## Evaluation Metrics
+- ROC-AUC
+- Precision, Recall, F1
+- Confusion matrices
+- SHAP values (Random Forest)
 
-* Logistic Regression for interpretability
-* Random Forest for feature importance and robustness
-  * Ensemble of Decision Trees trained on random subsets of data and features
-    * Each tree votes on the final prediction, improving stability and accuracy
-    * Handles both numerical and categorical data without extensive preprocessing
-  * Advantages
-    * Captures complex, non-linear relationships
-    * Resistant to overfitting through averaging
-    * Provides interpretable feature importance for identifying key stroke predictors
-  * Implementation
-    * Use scikit-learn’s RandomForestClassifier
-    * Tune parameters such as n_estimators, max_depth, and min_samples_split using grid search and cross-validation
+# Insights & Results
 
-### 2. Neural Networks
+## Random Forest Outperformed All Other Models
+- Highest ROC-AUC
+- Best stroke-case recall
+- Most balanced across metrics
+- Most stable across splits
 
-* **Fully Connected Neural Network (FCNN)** using Keras or PyTorch
-  * Input: normalized tabular features
-  * Architecture: 2–3 hidden layers with dropout and batch normalization
-    * Start from 1 hidden layer and gradually add more hidden layers
-  * Output: sigmoid activation for binary classification
+## Neural Networks Underperformed
+- Overfitting
+- Inconsistent performance
+- Lower minority recall
 
-### Evaluation Metrics
+## Logistic Regression Was Too Simple
+- Low recall for minority class
+- Underfit nonlinear interactions
 
-* ROC-AUC, precision-recall, F1-score
-* Confusion matrix and calibration plots
-* SHAP values for interpretability
+## Predictive Features (Random Forest)
+Common top predictors:
+- Age
+- Avg glucose level
+- Hypertension
+- Heart disease
+- BMI
+- Smoking status
 
-## Risks and Unknowns
+## Data Augmentation Was Essential
+Without augmentation:
+- Minority recall was near zero
+- Models predicted almost exclusively “no stroke”
 
-* **Class Imbalance** : Stroke negative cases are rare in this dataset, which may bias models toward the majority class. We plan to use techniques like SMOTE or class weighting to mitigate this.
-* **Missing Data** : BMI values contain `N/A` entries. We will impute missing values using median or regression-based methods.
-* **Data Quality** : Some entries have implausible values (e.g., age < 1). These will be filtered or corrected during preprocessing.
-* **Generalizability** : The dataset may not represent all populations. External validation with broader datasets is recommended before deployment.
-* **Model Complexity** : Neural networks may overfit due to limited data size. We will use regularization and cross-validation to monitor generalization.
+With augmentation:
+- Metrics became meaningful
+- Random Forest clearly best
 
-## Next Steps
+# Risks and Limitations
+- Class imbalance persists even after augmentation
+- Small dataset limits DL performance
+- Dataset may not generalize to wider populations
+- Synthetic oversampling can introduce noise
 
-* Perform data cleaning and exploratory analysis
-* Train baseline and neural models (FCNN)
-* Evaluate performance using ROC-AUC and precision-recall metrics
-* Visualize feature importance and risk factors
-* Document findings and recommendations in a reproducible format
+# Reproducibility & Setup Instructions
 
----
+## Local Setup
+### Clone
+```
+git clone <repo-url>
+cd ml9-team-project
+```
 
-## Possible Questions:
+### Install
+```
+conda create -n ml9 python=3.11
+conda activate ml9
+pip install -r requirements.txt
+```
 
-Are there different risk factors per age group, which would indicate different prevention strategies?
+### Run
+```
+jupyter lab
+```
 
-BMI, Age, Rural/Urban, see if there's different risk factors/prevention for different groups
+# Docker (Reproducible Environment)
 
-_Research question: can deep learning be used with this dataset to identify which risk factors are most pertinent to predict a stroke depending on demographic?_
+Included files:
+- Dockerfile
+- docker-compose.yml
+- .dockerignore
 
-Do we need to subdivide the dataset along demographics (age, lifestyle, etc.)
-
-
-## Approaches:
-Regression to find composition and correlation of different variables
-
-Based on significance of variables, create a model to predict stroke or not
-
-_We have determined that we need to develop an experiment to determine the number of layers that will be optimal to get a result from our project._
-
-Dask will be useful to run the experiments in parallel on multiple cores. We can use Google Colab to access GPUs for training our models.
-
-
-Adding this comment from outside account
-====
-To try and find solution to a GitHub issue, we created a test account to make a remote branch and create a pull request. We also developed a step-by-step walkthrough of using GitHub in organizations.
-
-
-
-## Possible Problem:
-The occurance of false stroke overwhelms the stroke occurence in this dataset by an order of magnitude.
-
-[1] Vyas, M., Fang, J., de Oliveria, C., et al. Attributable Costs of Stroke in Ontario, Canada and Their Variation by Stroke Type and Social Determinants of Health. Stroke 2023, 54, 2824.
-[2] Vu, T., Kokubo, Y., Inoue, M., et al. Machine Learning Approaches for Stroke Risk Prediction: Findings from the Suita Study. J Cardiovasc Dev Dis 2024, 11, 207. https://doi.org/10.3390/jcdd11070207
-[3] Moulaei, K., Afshari, L., Moulaei, R. et al. Explainable artificial intelligence for stroke prediction through comparison of deep learning and machine learning models. Sci Rep 2024, 14, 31392. https://doi.org/10.1038/s41598-024-82931-5
-
-## Docker (reproducible container)
-
-This repository now includes a `Dockerfile` and a `docker-compose.yml` to run the project inside a reproducible container (Jupyter Lab is the default entrypoint).
-
-Files added:
-
-- `Dockerfile` - builds a Python 3.11-based image, installs requirements from `requirements.txt`, copies the repo and starts Jupyter Lab on port 8888.
-- `.dockerignore` - prevents local environment, data and build artifacts from being copied into the image.
-- `docker-compose.yml` - convenience compose file to build and run the container with the current directory mounted.
-
-Quick start (macOS / zsh):
-
-1) Build the image locally:
-
-```zsh
+## Quick Start
+### Build
+```
 docker build -t ml9-team-project:latest .
 ```
 
-2) Run with docker-compose (recommended for development because it mounts the repo into the container):
-
-```zsh
+### Run
+```
 docker-compose up --build
 ```
 
-3) In your browser, open Jupyter Lab at:
-
+### Access Jupyter
 ```
 http://localhost:8888
 ```
 
-The container sets a default Jupyter token via the `JUPYTER_TOKEN` environment variable (default `ml9`). When using `docker-compose` the token is set in the compose file; change it there or set a new token with `-e JUPYTER_TOKEN=yourtoken` when running.
+# References
 
-Notes and recommendations:
-
-- The Docker image installs the exact packages listed in `requirements.txt`. If you add or remove Python packages, update `requirements.txt` and rebuild the image.
-- Large/compiled packages (torch, tensorflow) can make the image big; for production or CI consider a multi-stage build or a trimmed requirements set for specific tasks.
-- For non-interactive reproducible runs (training scripts, tests) consider adding a `CMD` or `ENTRYPOINT` variation that runs a script (e.g., `python -m experiments.train`) instead of Jupyter Lab.
-
+[1] Vyas et al., Stroke 2023  
+[2] Vu et al., J Cardiovasc Dev Dis 2024  
+[3] Moulaei et al., Sci Rep 2024
