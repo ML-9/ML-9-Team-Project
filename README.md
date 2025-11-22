@@ -27,7 +27,7 @@ Our final conclusion: **Random Forest is the most reliable and best-performing m
 - **Researchers in medical ML**
 - **Healthcare systems**
 
-# Narrative Summary (What We Actually Did)
+# Narrative Summary
 
 After reviewing multiple datasets, we selected the Kaggle Stroke Prediction Dataset due to its clinical relevance and rich feature variety.
 
@@ -38,8 +38,6 @@ However, we identified that the dataset suffers from severe class imbalance. To 
 3. Trained Logistic Regression, Random Forest, and FCNN models
 4. Evaluated with ROC-AUC, recall, F1, and confusion matrices
 5. Analyzed feature importance
-
-**Conclusion:** Random Forest produced the most accurate and stable classification results.
 
 # Dataset Description
 
