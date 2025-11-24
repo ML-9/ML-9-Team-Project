@@ -42,7 +42,7 @@ This project addresses that gap by:
 
 # Narrative Summary
 
-Before deciding on a project, we looked at multiple datasets related to healthcare and disease prediction. We wanted to score areas of study based on the number of features they measured, as well as the number of datapoints available. After evaluating several options, we selected the Kaggle Stroke Prediction Dataset due to its clinical relevance and rich feature variety. 
+Before deciding on a project, we looked at multiple datasets related to healthcare and disease prediction. We wanted to score areas of study based on the number of features they measured, as well as the number of datapoints available. After evaluating several options, we selected the Kaggle Stroke Prediction Dataset due to its clinical relevance and rich feature variety.
 
 However, we identified that the dataset suffers from severe class imbalance. To overcome this, we:
 
@@ -236,13 +236,13 @@ Challenges with FCNN we discovered included:
 
 **Final Tuned FCNN Performance**
 
-| col1       | col2 | col3 |      |
-| ---------- | :--: | :--: | :--: |
-| Prediction | 0.94 | 0.82 |      |
-| Recall     | 0.81 | 0.94 |      |
-| F1-score   | 0.87 | 0.88 |      |
-| Accuracy   |  -  |  -  | 0.88 |
-| ROC-AUC    |  -  |  -  | 0.96 |
+| Metric     | Class 0 | Class 1 | Overall |
+| ---------- | :-----: | :-----: | :-----: |
+| Prediction |  0.94  |  0.82  |        |
+| Recall     |  0.81  |  0.94  |        |
+| F1-score   |  0.87  |  0.88  |        |
+| Accuracy   |    -    |    -    |  0.88  |
+| ROC-AUC    |    -    |    -    |  0.96  |
 
 ## Logistic Regression Was Too Simple
 
@@ -368,8 +368,6 @@ http://localhost:8888
 Open and run the Jupyter notebooks in the `process/` directories. Specifically, to recreate the experiments, look in the `Experiments` directory.
 
 ---
-
-
 
 # Credits and links to personal videos
 
